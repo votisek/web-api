@@ -14,7 +14,7 @@ def get_redirect(redirect_id):
                 json.dump(users, f)
                 f.close()
                 return jsonify(users[redirect_id]), 200
-            else:<
+            else:
                 f.close()
                 return jsonify("{}"), 400
 
@@ -25,6 +25,10 @@ def edit_redirect():
     with open("users.json", "r+") as f:
         users = dict(json.load(f))
         if redirect_id in users.keys():
+            users[redirect_id]["redirect"] = url
+            users[redirect_id]["edit_count"] += 1
+        else:
+            print(f"neni redirect_id: {redirect_id}")
 
 
 @blueprint.route("/new-chip", methods=['GET'])
@@ -37,7 +41,8 @@ def add_chip():
             redirect_id: {
                 "redirect": default_redirect,
                 "color": color,
-                "redirect_count": 0
+                "redirect_count": 0,
+                "edit_count": 0
             }
 })
         
