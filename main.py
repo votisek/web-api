@@ -6,4 +6,4 @@ api.register_blueprint(endpoints.nfc_chip.blueprint)
 
 
 if __name__ == "__main__":
-    api.run("0.0.0.0", 5000)
+    api.run(host="0.0.0.0", port=42590)  # Upraven pouze port

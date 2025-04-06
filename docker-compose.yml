@@ -1,0 +1,17 @@
+services:
+  nfc-api:
+    image: python:3.9-slim
+    container_name: nfc-chip-api
+    working_dir: /app
+    ports:
+      - "42590:42590"  # Nastavení vašeho portu
+    volumes:
+      - .:/app
+      - ./endpoints/nfc_chip/users.json:/app/endpoints/nfc_chip/users.json
+    environment:
+      - FLASK_APP=main.py
+      - FLASK_ENV=production
+    command: >
+      sh -c "pip install flask gunicorn &&
+      gunicorn --bind 0.0.0.0:42590 --workers 2 main:api"
+    restart: unless-stopped
