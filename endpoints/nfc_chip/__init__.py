@@ -7,7 +7,7 @@ import random
 blueprint = Blueprint("nfc_chip", __name__)
 
 # Constants
-USERS_JSON_PATH = os.path.join(os.path.dirname(__file__), "users.json")
+USERS_JSON_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "users.json")
 DEFAULT_REDIRECT = "divi.votisek.dev/edit-redirect"
 
 def load_users():
